@@ -8,14 +8,28 @@ git clone --recursive <GIT_REPOSITORY_URL>
 ```
 
 ## 서버 환경에서의 실행
-`root` 권한을 가진 상태로 `start.sh` 를 실행하면 자동으로 `Docker` 를 포함하여 모든 패키지를 자동으로 설치하고 서버를 실행함.   
+`root` 권한을 가진 상태로 `start.sh` 를 실행하면 자동으로 `Docker` 를 포함하여 모든 패키지를 자동으로 설치하고 서버를 실행함.
 
 ```bash
 sudo /bin/bash ./start.sh
 ```
-  
-또는  
+
+또는
 ```bash
 sudo su
 ./start.sh
+```
+
+
+## 서버 환경에서의 종료
+`root` 권한을 가진 상태로 `start.sh` 를 실행하면 모든 실행중인 컨테이너를 종료함.
+
+```bash
+sudo /bin/bash ./stop.sh
+```
+
+또는
+```bash
+sudo su
+./stop.sh
 ```
