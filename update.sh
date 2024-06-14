@@ -14,5 +14,5 @@ for dir in "${services[@]}"; do
   fi
 
   # Print success message
-  echo "[Updated] $dir started successfully"
+  echo "[Updated] $dir updated successfully"
 done
