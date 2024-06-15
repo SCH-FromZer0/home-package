@@ -18,10 +18,12 @@ if ! /bin/bash ./docker_installer.sh; then
   fi
 fi
 
+echo -e "$COLOR_YELLOW [ RUN ]$COLOR_END Running update..."
+
 services=("client" "server")
 
 for dir in "${services[@]}"; do
-    echo -e "$COLOR_YELLOW [ STOP ]$COLOR_END Processing $dir directory..."
+    echo -e "$COLOR_YELLOW [ RE-BUILD ]$COLOR_END Processing $dir directory..."
 
     # Change to the directory
     if ! cd "./$dir"; then
@@ -29,16 +31,20 @@ for dir in "${services[@]}"; do
         exit 1
     fi
 
-    # Run docker-compose up
-    if ! docker compose stop; then
-        echo -e "$COLOR_RED [ ERROR ]$COLOR_END service $dir may not running this time"
+    # Run docker-compose build
+    if ! docker-compose build --no-cache; then
+        if ! docker compose build --no-cache; then
+            echo -e "$COLOR_RED [ ERROR ]$COLOR_END Failed to start Docker Compose for $dir"
+            exit 1
+        fi
     fi
 
     # Print success message
-    echo -e "$COLOR_GREEN [ STOP ]$COLOR_END $dir stopped successfully"
+    echo -e "$COLOR_GREEN [ OK ]$COLOR_END $dir started successfully"
 
     # Go back to the original directory
     cd ../;
 done
 
-echo -e "$COLOR_GREEN [ OK ]$COLOR_END all containers stopped successfully"
+docker rmi $(docker images -f "dangling=true" -q)
+echo -e "$COLOR_GREEN [ OK ]$COLOR_END Purged all dangling images"

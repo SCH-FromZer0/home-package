@@ -25,18 +25,18 @@ for dir in "${services[@]}"; do
 
     # Change to the directory
     if ! cd "./$dir"; then
-        echo -e "$COLOR_RED [ FATAL ]$COLOR_END Failed to change directory to $dir"
+        echo -e "$COLOR_RED [ ERROR ]$COLOR_END Failed to change directory to $dir"
         exit 1
     fi
 
     # Run docker-compose up
     if ! docker compose up -d; then
-        echo -e "$COLOR_RED [ FATAL ]$COLOR_END Failed to start Docker Compose for $dir"
+        echo -e "$COLOR_RED [ ERROR ]$COLOR_END Failed to start Docker Compose for $dir"
         exit 1
     fi
 
     # Print success message
-    echo -e "$COLOR_GREEN [ LGTM ]$COLOR_END $dir started successfully"
+    echo -e "$COLOR_GREEN [ OK ]$COLOR_END $dir started successfully"
 
     # Go back to the original directory
     cd ../;

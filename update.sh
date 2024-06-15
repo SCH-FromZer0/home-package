@@ -10,6 +10,13 @@ if ! command -v git >/dev/null 2>&1; then
     exit 1
 fi
 
+echo -e "$COLOR_YELLOW [ UPDATER ]$COLOR_END Updating bootstrapper... "
+if ! git pull; then
+  echo -e "$COLOR_RED [ UPDATER ]$COLOR_END Failed to update bootstrapper"
+else
+  echo -e "$COLOR_GREEN [ OK ]$COLOR_END $dir updated bootstrapper successfully"
+fi
+
 services=("client" "server")
 for dir in "${services[@]}"; do
   echo -e "$COLOR_YELLOW [ UPDATER ]$COLOR_END Processing $dir ..."
@@ -19,5 +26,5 @@ for dir in "${services[@]}"; do
   fi
 
   # Print success message
-  echo -e "$COLOR_GREEN [ LGTM ]$COLOR_END $dir updated successfully"
+  echo -e "$COLOR_GREEN [ OK ]$COLOR_END $dir updated successfully"
 done

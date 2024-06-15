@@ -16,6 +16,8 @@ if ! /bin/bash ./docker_installer.sh; then
     echo -e "$COLOR_RED [ ERROR ]$COLOR_END Error while configuring docker install source"
     exit 1
   fi
+else
+  echo -e "$COLOR_GREEN [ OK ]$COLOR_END Docker already installed"
 fi
 
 /bin/bash ./update.sh
